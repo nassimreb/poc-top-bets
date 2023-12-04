@@ -1,0 +1,21 @@
+<div class="bet-item">
+  <div class="bet-item__left">
+    <div class="bet-item__icon">
+      {{ bet?.sport }}
+    </div>
+    <div class="bet-item__infos">
+      <div class="bet-item__title">{{ bet?.description }}</div>
+      <div class="bet-item__competition">{{ bet?.competition }}</div>
+      <div class="bet-item__time"> {{ bet?.label }} Fin
+        Valid. {{ bet?.endValidationDate | date: 'dd/MM HH\'h\'mm'}}</div>
+      <div class="bet-item__market">
+        <div *ngFor="let market of bet?.market"
+             class="bet-item__market-details"> {{market.label}} | {{market.price}} </div>
+      </div>
+    </div>
+  </div>
+  <div class="bet-item__right">
+    > +{{ bet?.moreMarkets}}
+  </div>
+
+</div>

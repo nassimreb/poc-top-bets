@@ -1,0 +1,8 @@
+<h2 class="top-bets-title">TOP DES PARIS</h2>
+
+<div *ngFor="let bet of bets" class="top-bets-container">
+  <app-bet [bet]="bet">
+  </app-bet>
+</div>
+
+<button (click)="loadMoreBets()" class="display-more" [disabled]="isLastPage">Afficher plus ?</button>

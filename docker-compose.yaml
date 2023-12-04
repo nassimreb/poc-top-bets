@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: ./top-paris-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URI: mongodb://mongo:27017/top-bets
+      PARIONS_SPORT_BASE_URL: https://www.pointdevente.parionssport.fdj.fr/v1
+      TOP_EVENTS_LIMIT: 50
+
+  frontend:
+    build:
+      context: ./top-paris-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
